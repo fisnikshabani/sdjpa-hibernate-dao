@@ -20,8 +20,8 @@ public class AuthorDaoImpl implements AuthorDao{
 
     @Override
     public List<Author> listAuthorByLastNameLike(String lastName) {
-
         EntityManager em = getEntityManager();
+
         try {
             Query query = em.createQuery("SELECT a from Author a where a.lastName like :last_name");
             query.setParameter("last_name", lastName);

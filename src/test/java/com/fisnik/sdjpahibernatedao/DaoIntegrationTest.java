@@ -4,6 +4,7 @@ import com.fisnik.sdjpahibernatedao.dao.AuthorDao;
 import com.fisnik.sdjpahibernatedao.dao.BookDao;
 import com.fisnik.sdjpahibernatedao.domain.Author;
 import com.fisnik.sdjpahibernatedao.domain.Book;
+import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -99,6 +100,18 @@ public class DaoIntegrationTest {
         Book book = bookDao.getById(3L);
 
         assertThat(book.getId()).isNotNull();
+    }
+
+    @Test
+    void testFindBookByISBN() {
+        Book book = new Book();
+        book.setIsbn("1234" + RandomString.make());
+        book.setTitle("ISBN TEST");
+
+        Book saved = bookDao.saveNewBook(book);
+
+        Book fetched = bookDao.findByISBN(book.getIsbn());
+        assertThat(fetched).isNotNull();
     }
 
     @Test
