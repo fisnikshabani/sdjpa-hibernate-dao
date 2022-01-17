@@ -19,4 +19,6 @@ public interface AuthorDao {
     Author updateAuthor(Author author);
 
     void deleteAuthorById(Long id);
+
+    Author findAuthorByNameCriteria(String craig, String walls);
 }

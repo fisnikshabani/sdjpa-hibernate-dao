@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 @Component
 public class BookDaoImpl implements BookDao {
@@ -88,6 +89,18 @@ public class BookDaoImpl implements BookDao {
         em.close();
     }
 
+    @Override
+    public List<Book> findAll() {
+        EntityManager em = getEntityManager();
+
+        try {
+            TypedQuery<Book> query = em.createNamedQuery("find_all_books", Book.class);
+
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 
     private EntityManager getEntityManager(){
         return emf.createEntityManager();

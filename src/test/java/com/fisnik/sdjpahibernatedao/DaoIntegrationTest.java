@@ -31,7 +31,6 @@ public class DaoIntegrationTest {
     @Test
     void testFindAllAuthors() {
         List<Author> authors = authorDao.findAll();
-
         assertThat(authors).isNotNull();
         assertThat(authors.size()).isGreaterThan(0);
     }
@@ -131,8 +130,14 @@ public class DaoIntegrationTest {
 
     @Test
     void testGetAuthorByName() {
-        Author author = authorDao.findAuthorByName("Fisnik", "Shabani");
+        Author author = authorDao.findAuthorByName("Craig", "Walls");
+
         assertThat(author).isNotNull();
+    }
+
+    @Test
+    void testGetAuthorByNameCriteria() {
+        Author author = authorDao.findAuthorByNameCriteria("Craig", "Walls");
     }
 
     @Test
